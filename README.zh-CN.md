@@ -1,6 +1,8 @@
 # iOS 闹钟混乱模拟器
 
-[English](README.md)
+[![项目图标](assets/favicon.svg)](http://43.142.42.253:8080)
+
+[打开在线体验](http://43.142.42.253:8080) · [English](README.md)
 
 闹钟太少？那就让它们铺满屏幕。
 

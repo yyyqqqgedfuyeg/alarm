@@ -1,6 +1,8 @@
 # iOS Alarm Chaos Simulator
 
-[简体中文](README.zh-CN.md)
+[![Alarm Chaos icon](assets/favicon.svg)](http://43.142.42.253:8080)
+
+[Try the live demo](http://43.142.42.253:8080) · [简体中文](README.zh-CN.md)
 
 Too few alarms? Cover the whole screen with them.
 
