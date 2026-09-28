@@ -1,0 +1,7 @@
+services:
+  alarm-chaos:
+    build: .
+    container_name: alarm-chaos
+    ports:
+      - "8080:80"
+    restart: unless-stopped

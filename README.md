@@ -22,3 +22,7 @@ Click **Radar** to enable sound. The source is [`audio.mp3`](assets/audio.mp3): 
 - [`js/audio.js`](js/audio.js): sound playback and overlap.
 - [`audio.mp3`](assets/audio.mp3): the soundtrack to the commotion.
 
+## Run it with Docker
+
+The included [`Dockerfile`](Dockerfile) and [`compose.yaml`](compose.yaml) serve the page with Nginx. On the Docker CE server, run `docker compose up -d --build` in the project directory, then open `http://SERVER-IP:8080`.
+

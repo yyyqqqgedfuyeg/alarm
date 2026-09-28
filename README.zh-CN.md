@@ -22,3 +22,7 @@
 - [`js/audio.js`](js/audio.js)：铃声播放和声音叠加。
 - [`audio.mp3`](assets/audio.mp3)：本场混乱的伴奏。
 
+## 用 Docker 启动
+
+项目附带 [`Dockerfile`](Dockerfile) 和 [`compose.yaml`](compose.yaml)，使用 Nginx 提供页面。在 Docker CE 服务器的项目目录中运行 `docker compose up -d --build`，然后访问 `http://服务器IP:8080`。
+
