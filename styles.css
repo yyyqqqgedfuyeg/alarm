@@ -1,0 +1,173 @@
+* {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Floating canvas covering full screen */
+    #chaos-viewport {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    /* Individual chaotic alarm card */
+    .alarm-card {
+      position: absolute;
+      background: rgba(10, 10, 10, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      cursor: grab;
+      touch-action: none;
+      transform-origin: center center;
+      transition: box-shadow 0.2s ease, filter 0.2s ease;
+      will-change: transform, left, top;
+    }
+
+    .alarm-card:active {
+      cursor: grabbing;
+    }
+
+    /* Hover effect: Scale up for clear view without altering z-index */
+    .alarm-card:hover {
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95), 0 0 24px rgba(52, 199, 89, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      filter: brightness(1.22);
+    }
+
+    .alarm-time-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      pointer-events: none;
+    }
+
+    .alarm-time {
+      font-weight: 200;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      display: flex;
+      align-items: baseline;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.15s ease;
+    }
+
+    .alarm-ampm {
+      font-size: 0.42em;
+      margin-left: 4px;
+      font-weight: 300;
+      opacity: 0.88;
+      letter-spacing: 0;
+    }
+
+    .alarm-subtext {
+      font-size: 11px;
+      color: #8e8e93;
+      margin-top: 2px;
+      font-weight: 400;
+      transition: color 0.15s ease;
+    }
+
+    /* Authentic iOS Toggle Switch */
+    .ios-switch {
+      position: relative;
+      flex-shrink: 0;
+      width: 51px;
+      height: 31px;
+      background-color: #39393d;
+      border-radius: 9999px;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .ios-switch .thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 27px;
+      height: 27px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+    }
+
+    /* Activated State */
+    .alarm-card.is-active .ios-switch {
+      background-color: #34C759;
+      box-shadow: 0 0 16px rgba(52, 199, 89, 0.6);
+    }
+
+    .alarm-card.is-active .ios-switch .thumb {
+      transform: translateX(20px);
+    }
+
+    /* Deactivated typography dim */
+    .alarm-card:not(.is-active) .alarm-time {
+      color: #636366;
+    }
+    .alarm-card:not(.is-active) .alarm-subtext {
+      color: #444446;
+    }
+
+    /* Burst flicker shake animation for manual triggers */
+    @keyframes spasticTwitch {
+      0% { transform: scale(var(--base-scale, 1)) rotate(var(--base-rot, 0deg)) translate(0, 0); }
+      20% { transform: scale(calc(var(--base-scale, 1) * 1.06)) rotate(calc(var(--base-rot, 0deg) + 2deg)) translate(-3px, 2px); }
+      40% { transform: scale(calc(var(--base-scale, 1) * 1.04)) rotate(calc(var(--base-rot, 0deg) - 2deg)) translate(3px, -2px); }
+      60% { transform: scale(calc(var(--base-scale, 1) * 1.07)) rotate(calc(var(--base-rot, 0deg) + 1.5deg)) translate(-2px, -2px); }
+      80% { transform: scale(calc(var(--base-scale, 1) * 1.03)) rotate(calc(var(--base-rot, 0deg) - 1.5deg)) translate(2px, 1px); }
+      100% { transform: scale(var(--base-scale, 1)) rotate(var(--base-rot, 0deg)) translate(0, 0); }
+    }
+
+    .spastic-burst {
+      animation: spasticTwitch 0.08s infinite !important;
+      filter: brightness(1.4) drop-shadow(0 0 16px rgba(52, 199, 89, 0.8)) !important;
+    }
+
+    /* Subtle global anxiety screen shake */
+    @keyframes jitterLoop {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-1.5px, 1.5px); }
+      50% { transform: translate(1.5px, -1.2px); }
+      75% { transform: translate(-1.2px, -1px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .chaos-jitter {
+      animation: jitterLoop 0.1s infinite;
+    }
+
+    /* Smooth range slider styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #2c2c2e;
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #34c759;
+      cursor: pointer;
+    }
